@@ -5,20 +5,20 @@
 class Clace < Formula
   desc ""
   homepage "https://clace.io"
-  version "0.11.8"
+  version "0.11.9"
 
   on_macos do
     on_intel do
-      url "https://github.com/claceio/clace/releases/download/v0.11.8/clace-v0.11.8-darwin-amd64.tar.gz"
-      sha256 "ab1378441f381d0205950b5be57d34f68aa38ffe7c043c3d2e731e6800331104"
+      url "https://github.com/claceio/clace/releases/download/v0.11.9/clace-v0.11.9-darwin-amd64.tar.gz"
+      sha256 "8153710896cb0fe4723823b14f2c9f26812c5c4243a5693016a5b66b3d1d274c"
 
       def install
         bin.install "clace"
       end
     end
     on_arm do
-      url "https://github.com/claceio/clace/releases/download/v0.11.8/clace-v0.11.8-darwin-arm64.tar.gz"
-      sha256 "87b68f19da18ee35fb468520b14a8213a338337b5b48b969603f06b0ca06a7f9"
+      url "https://github.com/claceio/clace/releases/download/v0.11.9/clace-v0.11.9-darwin-arm64.tar.gz"
+      sha256 "56124977c82e89c847df34e7628e2d603f310ceaa792f4f26f44ff6a96f7ad7b"
 
       def install
         bin.install "clace"
@@ -29,8 +29,8 @@ class Clace < Formula
   on_linux do
     on_intel do
       if Hardware::CPU.is_64_bit?
-        url "https://github.com/claceio/clace/releases/download/v0.11.8/clace-v0.11.8-linux-amd64.tar.gz"
-        sha256 "9bb528253ef132c12185ec1f2e4a609d0bdaa6f6f70ba546094bbf7ffba7dbb2"
+        url "https://github.com/claceio/clace/releases/download/v0.11.9/clace-v0.11.9-linux-amd64.tar.gz"
+        sha256 "8ba2d5334ea0cc8bc7e547dc71fd1873152141a9d554607612ff225e30737341"
 
         def install
           bin.install "clace"
@@ -39,8 +39,8 @@ class Clace < Formula
     end
     on_arm do
       if Hardware::CPU.is_64_bit?
-        url "https://github.com/claceio/clace/releases/download/v0.11.8/clace-v0.11.8-linux-arm64.tar.gz"
-        sha256 "340cf1e8606ada0df4f0854f2ee9d6e5bc889c6f6f19b53324ef6a93059ab247"
+        url "https://github.com/claceio/clace/releases/download/v0.11.9/clace-v0.11.9-linux-arm64.tar.gz"
+        sha256 "38836aa4b5f5821cec477787abc33f5c39a528752cc12920f2bf577254231a12"
 
         def install
           bin.install "clace"
@@ -50,11 +50,9 @@ class Clace < Formula
   end
 
   def post_install
-    # Create config directory if it doesn't exist
-    if [ ! -f "\#{etc}/clace.toml" ]; then
-      echo "Initializing Clace..."
-      "\#{opt_bin}/clace" password > "\#{etc}/clace.toml"
-    fi
+    unless File.exist?("#{etc}/clace.toml")
+      system "#{opt_bin}/clace password > #{etc}/clace.toml"
+    end
   end
 
   service do
