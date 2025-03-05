@@ -5,20 +5,20 @@
 class Clace < Formula
   desc ""
   homepage "https://clace.io"
-  version "0.11.9"
+  version "0.11.10"
 
   on_macos do
     on_intel do
-      url "https://github.com/claceio/clace/releases/download/v0.11.9/clace-v0.11.9-darwin-amd64.tar.gz"
-      sha256 "8153710896cb0fe4723823b14f2c9f26812c5c4243a5693016a5b66b3d1d274c"
+      url "https://github.com/claceio/clace/releases/download/v0.11.10/clace-v0.11.10-darwin-amd64.tar.gz"
+      sha256 "5b227d7cb7d08f0fe9f8f7f7b017682b208e913d300b0648f8e26ae6c7599ffc"
 
       def install
         bin.install "clace"
       end
     end
     on_arm do
-      url "https://github.com/claceio/clace/releases/download/v0.11.9/clace-v0.11.9-darwin-arm64.tar.gz"
-      sha256 "56124977c82e89c847df34e7628e2d603f310ceaa792f4f26f44ff6a96f7ad7b"
+      url "https://github.com/claceio/clace/releases/download/v0.11.10/clace-v0.11.10-darwin-arm64.tar.gz"
+      sha256 "206f1f576845e6b83c50c4f6177eb92cfa279d55d750d8c53feb3407b3f26c03"
 
       def install
         bin.install "clace"
@@ -29,8 +29,8 @@ class Clace < Formula
   on_linux do
     on_intel do
       if Hardware::CPU.is_64_bit?
-        url "https://github.com/claceio/clace/releases/download/v0.11.9/clace-v0.11.9-linux-amd64.tar.gz"
-        sha256 "8ba2d5334ea0cc8bc7e547dc71fd1873152141a9d554607612ff225e30737341"
+        url "https://github.com/claceio/clace/releases/download/v0.11.10/clace-v0.11.10-linux-amd64.tar.gz"
+        sha256 "e2ba3ba3e6c50c53993d3c87cea417c544a4f64717f5cc78146cfca12badace6"
 
         def install
           bin.install "clace"
@@ -39,8 +39,8 @@ class Clace < Formula
     end
     on_arm do
       if Hardware::CPU.is_64_bit?
-        url "https://github.com/claceio/clace/releases/download/v0.11.9/clace-v0.11.9-linux-arm64.tar.gz"
-        sha256 "38836aa4b5f5821cec477787abc33f5c39a528752cc12920f2bf577254231a12"
+        url "https://github.com/claceio/clace/releases/download/v0.11.10/clace-v0.11.10-linux-arm64.tar.gz"
+        sha256 "f7b28810b8f26bdb877ea302bc1668da516af2874e0273269c7abcb4bace9728"
 
         def install
           bin.install "clace"
@@ -51,7 +51,8 @@ class Clace < Formula
 
   def post_install
     unless File.exist?("#{etc}/clace.toml")
-      system "#{opt_bin}/clace password > #{etc}/clace.toml"
+      stderr = Utils.popen_read("#{opt_bin}/clace password 1>#{etc}/clace.toml 2>&1")
+      puts stderr
     end
   end
 
