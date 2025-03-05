@@ -5,20 +5,22 @@
 class Clace < Formula
   desc ""
   homepage "https://clace.io"
-  version "0.11.10"
+  version "0.11.11"
+
+  depends_on "mkcert"
 
   on_macos do
     on_intel do
-      url "https://github.com/claceio/clace/releases/download/v0.11.10/clace-v0.11.10-darwin-amd64.tar.gz"
-      sha256 "5b227d7cb7d08f0fe9f8f7f7b017682b208e913d300b0648f8e26ae6c7599ffc"
+      url "https://github.com/claceio/clace/releases/download/v0.11.11/clace-v0.11.11-darwin-amd64.tar.gz"
+      sha256 "ec4593d5179f84ef1a7689ae0497ef24c9e2ad4778dd0dfe2408ef38eb65cd77"
 
       def install
         bin.install "clace"
       end
     end
     on_arm do
-      url "https://github.com/claceio/clace/releases/download/v0.11.10/clace-v0.11.10-darwin-arm64.tar.gz"
-      sha256 "206f1f576845e6b83c50c4f6177eb92cfa279d55d750d8c53feb3407b3f26c03"
+      url "https://github.com/claceio/clace/releases/download/v0.11.11/clace-v0.11.11-darwin-arm64.tar.gz"
+      sha256 "c1cc6e2a0727c18e1a5de275b3c5ece556b7397479218c48836ebe7b5678021e"
 
       def install
         bin.install "clace"
@@ -29,8 +31,8 @@ class Clace < Formula
   on_linux do
     on_intel do
       if Hardware::CPU.is_64_bit?
-        url "https://github.com/claceio/clace/releases/download/v0.11.10/clace-v0.11.10-linux-amd64.tar.gz"
-        sha256 "e2ba3ba3e6c50c53993d3c87cea417c544a4f64717f5cc78146cfca12badace6"
+        url "https://github.com/claceio/clace/releases/download/v0.11.11/clace-v0.11.11-linux-amd64.tar.gz"
+        sha256 "371d6450ebe14cfec03fa5889e942c4a72f58ae57d1c93a65ef135afbd304691"
 
         def install
           bin.install "clace"
@@ -39,8 +41,8 @@ class Clace < Formula
     end
     on_arm do
       if Hardware::CPU.is_64_bit?
-        url "https://github.com/claceio/clace/releases/download/v0.11.10/clace-v0.11.10-linux-arm64.tar.gz"
-        sha256 "f7b28810b8f26bdb877ea302bc1668da516af2874e0273269c7abcb4bace9728"
+        url "https://github.com/claceio/clace/releases/download/v0.11.11/clace-v0.11.11-linux-arm64.tar.gz"
+        sha256 "15f1eb7f316374d404563561c88349ef2aea223a540a7d1e729f38796f3fa97c"
 
         def install
           bin.install "clace"
@@ -51,13 +53,22 @@ class Clace < Formula
 
   def post_install
     unless File.exist?("#{etc}/clace.toml")
-      stderr = Utils.popen_read("#{opt_bin}/clace password 1>#{etc}/clace.toml 2>&1")
-      puts stderr
+      pid = spawn("#{opt_bin}/clace password", out: "#{etc}/clace.toml")
+      puts "********** Initializing \"admin\" user **********"
+      Process.wait(pid)
+      puts "***********************************************"
+
+      mkcert_path = `which mkcert`.chomp
+      unless mkcert_path.empty?
+        system("mkdir -p #{HOMEBREW_PREFIX}/var/clace/config/certificates")
+        system("#{mkcert_path} -cert-file #{HOMEBREW_PREFIX}/var/clace/config/certificates/default.crt -key-file #{HOMEBREW_PREFIX}/var/clace/config/certificates/default.key localhost 127.0.0.1 \"*.localhost\"")
+        puts "Created localhost TLS certificates"
+      end
     end
   end
 
   service do
-    run [ opt_bin/"clace" ]
+    run [ opt_bin/"clace", "server", "start" ]
     keep_alive true
     working_dir HOMEBREW_PREFIX
     log_path var/"log/clace.log"
