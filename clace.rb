@@ -5,22 +5,22 @@
 class Clace < Formula
   desc ""
   homepage "https://clace.io"
-  version "0.11.26"
+  version "0.11.27"
 
   depends_on "mkcert"
 
   on_macos do
     on_intel do
-      url "https://github.com/claceio/clace/releases/download/v0.11.26/clace-v0.11.26-darwin-amd64.tar.gz"
-      sha256 "d200286d503b77022cebba9b63c6644011eb027e63a6646e5d54b4326222f319"
+      url "https://github.com/claceio/clace/releases/download/v0.11.27/clace-v0.11.27-darwin-amd64.tar.gz"
+      sha256 "0e4064b13eb3db996b769a5238df3caf7efb34b5bcf1b5fb7064387fd70d09bf"
 
       def install
         bin.install "clace"
       end
     end
     on_arm do
-      url "https://github.com/claceio/clace/releases/download/v0.11.26/clace-v0.11.26-darwin-arm64.tar.gz"
-      sha256 "e04cf17cb0a8befefcb416836b9768438a38414fd4b04b3b9eac2bf15aeed106"
+      url "https://github.com/claceio/clace/releases/download/v0.11.27/clace-v0.11.27-darwin-arm64.tar.gz"
+      sha256 "b089f9cb10e9f0dbe4f9ab5559110c76453be2a235066edac9b7ac2d37ac3ebc"
 
       def install
         bin.install "clace"
@@ -31,8 +31,8 @@ class Clace < Formula
   on_linux do
     on_intel do
       if Hardware::CPU.is_64_bit?
-        url "https://github.com/claceio/clace/releases/download/v0.11.26/clace-v0.11.26-linux-amd64.tar.gz"
-        sha256 "88b1f81213af420824ce436371b123a0ec48f1b5a1ee1b866ab09095f94956b6"
+        url "https://github.com/claceio/clace/releases/download/v0.11.27/clace-v0.11.27-linux-amd64.tar.gz"
+        sha256 "ff98f5640d9d5fefd0205ea90c87915b30ce71bf75d81c7abeba3e4947b8196e"
 
         def install
           bin.install "clace"
@@ -41,8 +41,8 @@ class Clace < Formula
     end
     on_arm do
       if Hardware::CPU.is_64_bit?
-        url "https://github.com/claceio/clace/releases/download/v0.11.26/clace-v0.11.26-linux-arm64.tar.gz"
-        sha256 "8e79121ccd03a0edcd101c61cbbf3e13b622aa2f6f4a7c9926ccc5da55d59074"
+        url "https://github.com/claceio/clace/releases/download/v0.11.27/clace-v0.11.27-linux-arm64.tar.gz"
+        sha256 "9931dadaf17857645f46578db9c006a77cacf6a575efd6302d45d34da9b5011c"
 
         def install
           bin.install "clace"
