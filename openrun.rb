@@ -5,22 +5,22 @@
 class Openrun < Formula
   desc ""
   homepage "https://openrun.dev"
-  version "0.14.9"
+  version "0.14.10"
 
   depends_on "mkcert"
 
   on_macos do
     on_intel do
-      url "https://github.com/openrundev/openrun/releases/download/v0.14.9/openrun-v0.14.9-darwin-amd64.tar.gz"
-      sha256 "5f26c0277588b49fb5fe3ff25d9ace5f8e76aeb301304e474440b9eb77f2a475"
+      url "https://github.com/openrundev/openrun/releases/download/v0.14.10/openrun-v0.14.10-darwin-amd64.tar.gz"
+      sha256 "35fc341a44a34a6642a27f119e45c8e3093458aabcc5d54dbcb2bbc1888ecbcb"
 
       def install
         bin.install "openrun"
       end
     end
     on_arm do
-      url "https://github.com/openrundev/openrun/releases/download/v0.14.9/openrun-v0.14.9-darwin-arm64.tar.gz"
-      sha256 "e201f41f6b8ade6310a0f861178554be198b70eb7391fb2267057b3a1e8291ef"
+      url "https://github.com/openrundev/openrun/releases/download/v0.14.10/openrun-v0.14.10-darwin-arm64.tar.gz"
+      sha256 "4f7b3ecf2c6a1e8229dce79f2f5360ef569e85117526835b7a4444d32ec0ac08"
 
       def install
         bin.install "openrun"
@@ -31,8 +31,8 @@ class Openrun < Formula
   on_linux do
     on_intel do
       if Hardware::CPU.is_64_bit?
-        url "https://github.com/openrundev/openrun/releases/download/v0.14.9/openrun-v0.14.9-linux-amd64.tar.gz"
-        sha256 "72f2b48799bcf8c596e1d1ecc2c31ae2ab5627e64cc3680c277920ce07b41cd5"
+        url "https://github.com/openrundev/openrun/releases/download/v0.14.10/openrun-v0.14.10-linux-amd64.tar.gz"
+        sha256 "99012197219b9705b02f6e33fc5caf67ac15ff1a6c33db4d35e29a8f2be900c3"
 
         def install
           bin.install "openrun"
@@ -41,8 +41,8 @@ class Openrun < Formula
     end
     on_arm do
       if Hardware::CPU.is_64_bit?
-        url "https://github.com/openrundev/openrun/releases/download/v0.14.9/openrun-v0.14.9-linux-arm64.tar.gz"
-        sha256 "1d8bcd5796f3d3bb1c6ef7a31decfa4b440468031d1e458045b7cb8934c691df"
+        url "https://github.com/openrundev/openrun/releases/download/v0.14.10/openrun-v0.14.10-linux-arm64.tar.gz"
+        sha256 "c7f8d5683932a015f32d68f8c83150c02be84de3aa9d21b7b445af576c436e88"
 
         def install
           bin.install "openrun"
